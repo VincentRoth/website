@@ -1,0 +1,23 @@
+{
+  "name": "website",
+  "version": "0.0.1",
+  "description": "",
+  "author": "VincentRoth",
+  "license": "none",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:VincentRoth/website.git"
+  },
+  "keywords": [
+    "website"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "express": "^4.16.3",
+    "open": "^0.0.5"
+  }
+}
