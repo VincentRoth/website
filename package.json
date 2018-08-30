@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "description": "",
   "author": "VincentRoth",
-  "license": "none",
+  "license": "UNLICENSED",
+  "private": "true",
   "main": "server.js",
   "scripts": {
+    "build": "gulp build",
     "start": "node server.js"
   },
   "repository": {
@@ -15,9 +17,15 @@
   "keywords": [
     "website"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.16.3"
+  },
   "devDependencies": {
-    "express": "^4.16.3",
-    "open": "^0.0.5"
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.4.0",
+    "gulp-file-include": "^2.0.1",
+    "gulp-i18n-localize": "^1.2.7",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-replace": "^1.0.0"
   }
 }
