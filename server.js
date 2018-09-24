@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
-var $http = require('http');
-var $express = require('express');
+const $http = require("http");
+const $express = require("express");
 
-var serverPort = 3000;
-var app = $express();
-app.use($express.static('dist/fr'));
-app.use('/en', $express.static('dist/en'));
+const serverPort = 3000;
+const app = $express();
+app.use($express.static("dist/fr"));
+app.use("/en", $express.static("dist/en"));
+app.use("/assets", $express.static("dist/assets"));
 
-var server = $http.Server(app);
+const server = $http.Server(app);
 server.listen(serverPort);
