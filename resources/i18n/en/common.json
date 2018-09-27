@@ -1,8 +1,23 @@
 {
-    "page": {
-        "title": {
-            "home": "Home",
-            "canvas": "Canvas"
+    "menu": {
+        "entry": {
+            "game" : "Games",
+            "tools": "Tools",
+            "simulator": "Simulator"
+        },
+        "link": {
+            "game": {
+                "pong": "Pong",
+                "pso3-rules": "PSO III C.A.R.D. - rules"
+            },
+            "tools": {
+                "pso3-card": "PSO III C.A.R.D. - card",
+                "zombicide-id-card": "Zombicide - ID card",
+                "eclipse-phase": "Eclipse Phase - Toolbox"
+            },
+            "simulator": {
+                "npc-life": "To come"
+            }
         }
     }
 }

@@ -1,11 +1,42 @@
 <header>
+    <a class="img" href="@@webRoot">
+        <img src="/assets/images/profile.jpg">
+    </a>
+    <h1>Vincent Roth</h1>
     <nav>
         <ul>
             <li>
-                <a href="@@webRoot">${{common.page.title.home}}</a>
+                ${{common.menu.entry.game}}
+                <ul>
+                    <li>
+                        <a>${{common.menu.link.game.pong}}</a>
+                    </li>
+                    <li>
+                        <a>${{common.menu.link.game.pso3-rules}}</a>
+                    </li>
+                </ul>
             </li>
             <li>
-                <a href="@@webRoot/canvas">${{common.page.title.canvas}}</a>
+                ${{common.menu.entry.tools}}
+                <ul>
+                    <li>
+                        <a>${{common.menu.link.tools.pso3-card}}</a>
+                    </li>
+                    <li>
+                        <a>${{common.menu.link.tools.zombicide-id-card}}</a>
+                    </li>
+                    <li>
+                        <a>${{common.menu.link.tools.eclipse-phase}}</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                ${{common.menu.entry.simulator}}
+                <ul>
+                    <li>
+                        <a>${{common.menu.link.simulator.npc-life}}</a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </nav>
