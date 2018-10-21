@@ -1,8 +1,9 @@
 <header>
+    <a href="javascript:void(0)" class="close-header" onclick="toggleHeader()">&times;</a>
     <a class="profile" href="@@webRoot">
         <img src="/assets/images/profile.jpg">
     </a>
-    <h1>${{common.title}}</h1>
+    <h1>${{common.title}}<sup>&copy;</sup></h1>
     <nav>
         <ul>
             <li>
@@ -16,20 +17,21 @@
                     </li> -->
                 </ul>
             </li>
-            <!-- <li>
+            <li>
                 ${{common.menu.entry.tools}}
                 <ul>
                     <li>
-                        <a>${{common.menu.link.tools.pso3-card}}</a>
+                        <a>${{common.to-come}}</a>
+                        <!-- <a>${{common.menu.link.tools.pso3-card}}</a> -->
                     </li>
-                    <li>
+                    <!-- <li>
                         <a>${{common.menu.link.tools.zombicide-id-card}}</a>
                     </li>
                     <li>
                         <a>${{common.menu.link.tools.eclipse-phase}}</a>
-                    </li>
+                    </li> -->
                 </ul>
-            </li> -->
+            </li>
             <!-- <li>
                 ${{common.menu.entry.simulator}}
                 <ul>
@@ -66,3 +68,5 @@
     </nav>
     <p>${{common.menu.no-cookie}}</p>
 </header>
+
+<a href="javascript:void(0)" class="open-header" onclick="toggleHeader()">&#9776;</a>

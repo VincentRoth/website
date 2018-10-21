@@ -9,10 +9,10 @@
     "link": {
       "game": {
         "pong": "Pong",
-        "pso3-rules": "PSO III C.A.R.D. - rules"
+        "pso3-rules": "PSO III - Rules"
       },
       "tools": {
-        "pso3-card": "PSO III C.A.R.D. - card",
+        "pso3-card": "PSO III - Card",
         "zombicide-id-card": "Zombicide - ID card",
         "eclipse-phase": "Eclipse Phase - Toolbox"
       },
@@ -20,7 +20,7 @@
         "npc-life": "To come"
       }
     },
-    "no-cookie": "Baked with no web cookie."
+    "no-cookie": "Baked without web cookie."
   },
   "to-come": "To come",
   "in-construction": "Page in under construction. Stay tuned !"

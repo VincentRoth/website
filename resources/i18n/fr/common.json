@@ -9,11 +9,11 @@
     "link": {
       "game": {
         "pong": "Pong",
-        "pso3-rules": "PSO III C.A.R.D. - règles"
+        "pso3-rules": "PSO III - Règles"
       },
       "tools": {
-        "pso3-card": "PSO III C.A.R.D. - carte",
-        "zombicide-id-card": "Zombicide - fiche d'identité",
+        "pso3-card": "PSO III - Carte",
+        "zombicide-id-card": "Zombicide - Fiche d'identité",
         "eclipse-phase": "Eclipse Phase - Boîte à outils"
       },
       "simulator": {
