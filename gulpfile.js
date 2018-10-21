@@ -33,14 +33,13 @@ gulp.task("html-partial", ["clean"], function() {
 gulp.task("html-i18n", ["html-partial"], function() {
   return gulp
     .src(`${DIST_TMP_FOLDER}/**`)
-    // FIXME When watch is fired, all build and reload is done but the json used for localization is still the previous one (cache ?)
-    // Closed issue https://github.com/filaraujo/gulp-i18n-localize/issues/2
     .pipe(
       $.i18nLocalize({
         delimeters: ["${{", "}}"],
         locales: ["en", "fr"],
         localeDir: "resources/i18n",
-        schema: "directory"
+        schema: "directory",
+        ignoreErrors: true
       })
     )
     .pipe(gulp.dest(DIST_FOLDER));
@@ -53,6 +52,7 @@ gulp.task("clean-html", ["html-i18n"], function() {
 gulp.task("less", ["clean"], function() {
   return gulp
     .src(SRC_CSS)
+    .pipe($.plumber())
     .pipe(
       $.less({
         paths: [path.join(__dirname, "less", "includes")]

@@ -1,23 +1,27 @@
 {
-    "menu": {
-        "entry": {
-            "game" : "Games",
-            "tools": "Tools",
-            "simulator": "Simulator"
-        },
-        "link": {
-            "game": {
-                "pong": "Pong",
-                "pso3-rules": "PSO III C.A.R.D. - rules"
-            },
-            "tools": {
-                "pso3-card": "PSO III C.A.R.D. - card",
-                "zombicide-id-card": "Zombicide - ID card",
-                "eclipse-phase": "Eclipse Phase - Toolbox"
-            },
-            "simulator": {
-                "npc-life": "To come"
-            }
-        }
-    }
+  "title": "Vincent ROTH",
+  "menu": {
+    "entry": {
+      "game": "Games",
+      "tools": "Tools",
+      "simulator": "Simulator"
+    },
+    "link": {
+      "game": {
+        "pong": "Pong",
+        "pso3-rules": "PSO III C.A.R.D. - rules"
+      },
+      "tools": {
+        "pso3-card": "PSO III C.A.R.D. - card",
+        "zombicide-id-card": "Zombicide - ID card",
+        "eclipse-phase": "Eclipse Phase - Toolbox"
+      },
+      "simulator": {
+        "npc-life": "To come"
+      }
+    },
+    "no-cookie": "Baked with no web cookie."
+  },
+  "to-come": "To come",
+  "in-construction": "Page in under construction. Stay tuned !"
 }

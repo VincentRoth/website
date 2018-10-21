@@ -3,13 +3,15 @@
 
 <head>
     @@include('./partial/meta.partial.html')
-    <title>Vincent Roth</title>
+    <title>${{common.title}}</title>
 </head>
 
 <body>
     @@include('./partial/header.partial.html')
     <main>
-        <h1>Home page</h1>
+        <h1>${{home.title}}</h1>
+        <p>${{home.introduction}}</p>
+        <p>${{home.content}}</p>
     </main>
 </body>
 

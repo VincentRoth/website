@@ -1,22 +1,22 @@
 <header>
-    <a class="img" href="@@webRoot">
+    <a class="profile" href="@@webRoot">
         <img src="/assets/images/profile.jpg">
     </a>
-    <h1>Vincent Roth</h1>
+    <h1>${{common.title}}</h1>
     <nav>
         <ul>
             <li>
                 ${{common.menu.entry.game}}
                 <ul>
                     <li>
-                        <a>${{common.menu.link.game.pong}}</a>
+                        <a href="@@webRoot/games/pong">${{common.menu.link.game.pong}}</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a>${{common.menu.link.game.pso3-rules}}</a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
-            <li>
+            <!-- <li>
                 ${{common.menu.entry.tools}}
                 <ul>
                     <li>
@@ -29,15 +29,40 @@
                         <a>${{common.menu.link.tools.eclipse-phase}}</a>
                     </li>
                 </ul>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
                 ${{common.menu.entry.simulator}}
                 <ul>
                     <li>
                         <a>${{common.menu.link.simulator.npc-life}}</a>
                     </li>
                 </ul>
+            </li> -->
+        </ul>
+        <ul class="languages">
+            <li>
+                <a href="/">
+                    <img src="/assets/images/flags/france.png">
+                </a>
+            </li>
+            <li>
+                <a href="/en/">
+                    <img src="/assets/images/flags/united-kingdom.png">
+                </a>
+            </li>
+        </ul>
+        <ul class="external-links">
+            <li>
+                <a href="https://github.com/VincentRoth/" target="_about">
+                    <img src="/assets/images/icons/github.png">
+                </a>
+            </li>
+            <li>
+                <a href="https://www.linkedin.com/in/vincent-roth/" target="_about">
+                    <img src="/assets/images/icons/linkedin.png">
+                </a>
             </li>
         </ul>
     </nav>
+    <p>${{common.menu.no-cookie}}</p>
 </header>

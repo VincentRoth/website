@@ -1,3 +1,20 @@
+// https://coolors.co/fff8f0-191923-0e79b2-969a97-c60f7b
+// https://coolors.co/fff8f0-0e79b2-160f29-246a73-368f8b
+@color-main: #fff8f0;
+@color-second: #0e79b2;
+@color-ter: #160f29;
+@color-quart: #246a73;
+@color-quint: #368f8b;
+
+@font-face {
+  font-family: "Sans Forgetica";
+  src: url("/assets/fonts/SansForgetica-Regular.otf") format("openType");
+}
+@font-face {
+  font-family: "Press Start 2P";
+  src: url("/assets/fonts/PressStart2P.ttf") format("truetype");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +24,9 @@ html,
 body {
   height: 100vh;
   width: 100vw;
+  background-color: @color-main;
+  color: @color-ter;
+  font-family: sans-serif;
 }
 body {
   display: flex;
@@ -17,16 +37,17 @@ body {
     align-items: center;
     justify-content: flex-start;
     flex: 1;
-    min-width: 280px;
-    padding-top: 5rem;
     height: 100%;
-    background-color: rgb(88, 133, 255);
+    background-color: @color-second;
+    color: @color-main;
     h1 {
       padding: 0.75rem;
       text-align: center;
-      font-size: 1.6rem;
+      font-size: 1rem;
+      font-family: "Press Start 2P", sans-serif;
     }
-    a.img {
+    a.profile {
+      padding-top: 5rem;
       height: 160px;
       width: 160px;
       img {
@@ -36,17 +57,20 @@ body {
       }
     }
     nav {
-      color: rgb(20, 20, 20);
+      width: 100%;
       ul {
-        padding: 0.75rem 1rem;
+        padding: 0.75rem 2rem;
+        text-transform: uppercase;
+        font-family: "Press Start 2P", sans-serif;
         li {
           padding: 0.1rem;
           list-style: none;
-          font-size: 1.4rem;
+          font-size: 1rem;
           ul {
-            padding: 0.5rem 1rem 1rem;
+            padding: 0.5rem 0rem 1rem 2rem;
+            text-transform: none;
             li {
-              font-size: 1.2rem;
+              font-size: 0.9rem;
             }
           }
           a {
@@ -59,10 +83,39 @@ body {
           }
         }
       }
+      .languages,
+      .external-links {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 0;
+        li {
+          padding: 0rem 0.5rem;
+        }
+        img {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+    p {
+      padding-top: 1rem;
     }
   }
   main {
     flex: 4.5;
-    margin: 10px;
+    padding: 1rem 2rem;
+    h1 {
+      margin-bottom: 1rem;
+      font-family: "Press Start 2P", sans-serif;
+      font-size: 1.5rem;
+    }
+    p {
+      padding: 0.5rem 0;
+      font-size: 1.5rem;
+      max-width: 900px;
+      text-align: justify;
+      white-space: pre-line;
+    }
   }
 }
