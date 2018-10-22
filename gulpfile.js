@@ -12,11 +12,14 @@ const SRC_ASSETS = 'src/assets/**/*';
 
 const PORT = 9000;
 
-gulp.task('clean', function() {
-  return gulp.src([DIST_FOLDER], { read: false }).pipe($.clean());
-});
+function clean() {
+  return gulp
+    .src([DIST_FOLDER], { read: false, allowEmpty: true })
+    .pipe($.clean());
+}
+exports.clean = clean;
 
-gulp.task('html-partial', ['clean'], function() {
+function htmlPartial() {
   return gulp
     .src([SRC_HTML, '!src/**/*.partial.html'])
     .pipe(
@@ -27,9 +30,10 @@ gulp.task('html-partial', ['clean'], function() {
       })
     )
     .pipe(gulp.dest(DIST_TMP_FOLDER));
-});
+}
+exports.htmlPartial = htmlPartial;
 
-gulp.task('html-i18n', ['html-partial'], function() {
+function htmlI18n() {
   return gulp
     .src(`${DIST_TMP_FOLDER}/**`)
     .pipe(
@@ -42,13 +46,17 @@ gulp.task('html-i18n', ['html-partial'], function() {
       })
     )
     .pipe(gulp.dest(DIST_FOLDER));
-});
+}
+exports.htmlI18n = htmlI18n;
 
-gulp.task('clean-html', ['html-i18n'], function() {
-  return gulp.src([DIST_TMP_FOLDER], { read: false }).pipe($.clean());
-});
+function htmlClean() {
+  return gulp
+    .src([DIST_TMP_FOLDER], { read: false, allowEmpty: true })
+    .pipe($.clean());
+}
+exports.htmlClean = htmlClean;
 
-gulp.task('less', ['clean'], function() {
+function less() {
   return gulp
     .src(SRC_CSS)
     .pipe($.plumber())
@@ -58,28 +66,43 @@ gulp.task('less', ['clean'], function() {
       })
     )
     .pipe(gulp.dest(DIST_ASSETS_FOLDER));
-});
+}
+exports.less = less;
 
-gulp.task('assets', ['clean'], function() {
+function assets() {
   return gulp.src(SRC_ASSETS).pipe(gulp.dest(DIST_ASSETS_FOLDER));
-});
+}
+exports.assets = assets;
 
-gulp.task('build', ['clean-html', 'less', 'assets'], function() {
-  return gulp.src(DIST_FOLDER).pipe($.connect.reload());
-});
+const build = gulp.series(
+  clean,
+  gulp.parallel(gulp.series(htmlPartial, htmlI18n, htmlClean), less, assets)
+);
+gulp.task('build', build);
+gulp.task('default', build);
 
-gulp.task('default', ['build']);
+const reloadOnBuild = () => gulp.src(DIST_FOLDER).pipe($.connect.reload());
+exports.reloadOnBuild = reloadOnBuild;
 
-gulp.task('watch', function() {
-  gulp.watch(['src/**/*', 'resources/**/*'], ['build']);
-});
+function watch() {
+  gulp.watch(['src/**/*', 'resources/**/*'], gulp.series(build, reloadOnBuild));
+}
+exports.watch = watch;
 
-gulp.task('serve', ['watch', 'build'], function() {
+function serveAndOpen() {
   $.connect.server({
     name: 'Dev App',
     root: ['dist', 'dist/fr'],
     port: PORT,
     livereload: true
   });
-  gulp.src('').pipe($.open({ uri: `http://localhost:${PORT}` }));
-});
+  gulp.src(__filename).pipe($.open({ uri: `http://localhost:${PORT}` }));
+}
+exports.serveAndOpen = serveAndOpen;
+
+const serve = gulp.series(
+  build,
+  reloadOnBuild,
+  gulp.parallel(watch, serveAndOpen)
+);
+gulp.task('serve', serve);
