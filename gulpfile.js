@@ -1,14 +1,14 @@
+const path = require('path');
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
-const path = require('path');
 
 const DIST_FOLDER = 'dist';
 const DIST_ASSETS_FOLDER = `${DIST_FOLDER}/assets`;
-const DIST_TMP_FOLDER = `${DIST_FOLDER}/tmp`;
 
 const SRC_HTML = 'src/**/*.html';
 const SRC_CSS = 'src/**/*.less';
 const SRC_ASSETS = 'src/assets/**/*';
+const SRC_JS = `${DIST_FOLDER}/**/*.js`;
 
 const PORT = 9000;
 
@@ -17,9 +17,12 @@ function clean() {
     .src([DIST_FOLDER], { read: false, allowEmpty: true })
     .pipe($.clean());
 }
-exports.clean = clean;
 
-function htmlPartial() {
+function assets() {
+  return gulp.src(SRC_ASSETS).pipe(gulp.dest(DIST_ASSETS_FOLDER));
+}
+
+function html() {
   return gulp
     .src([SRC_HTML, '!src/**/*.partial.html'])
     .pipe(
@@ -29,13 +32,11 @@ function htmlPartial() {
         indent: true
       })
     )
-    .pipe(gulp.dest(DIST_TMP_FOLDER));
-}
-exports.htmlPartial = htmlPartial;
-
-function htmlI18n() {
-  return gulp
-    .src(`${DIST_TMP_FOLDER}/**`)
+    .pipe(
+      $.useref({
+        base: '../'
+      })
+    )
     .pipe(
       $.i18nLocalize({
         delimeters: ['${{', '}}'],
@@ -47,14 +48,6 @@ function htmlI18n() {
     )
     .pipe(gulp.dest(DIST_FOLDER));
 }
-exports.htmlI18n = htmlI18n;
-
-function htmlClean() {
-  return gulp
-    .src([DIST_TMP_FOLDER], { read: false, allowEmpty: true })
-    .pipe($.clean());
-}
-exports.htmlClean = htmlClean;
 
 function less() {
   return gulp
@@ -67,27 +60,31 @@ function less() {
     )
     .pipe(gulp.dest(DIST_ASSETS_FOLDER));
 }
-exports.less = less;
 
-function assets() {
-  return gulp.src(SRC_ASSETS).pipe(gulp.dest(DIST_ASSETS_FOLDER));
+function js() {
+  return gulp
+    .src(SRC_JS)
+    .pipe($.plumber())
+    .pipe(
+      $.minify({
+        ext: {
+          min: '.js'
+        },
+        noSource: true
+      })
+    )
+    .pipe(gulp.dest(DIST_FOLDER));
 }
-exports.assets = assets;
 
-const build = gulp.series(
-  clean,
-  gulp.parallel(gulp.series(htmlPartial, htmlI18n, htmlClean), less, assets)
-);
+const build = gulp.series(clean, assets, gulp.parallel(html, less), js);
 gulp.task('build', build);
 gulp.task('default', build);
 
-const reloadOnBuild = () => gulp.src(DIST_FOLDER).pipe($.connect.reload());
-exports.reloadOnBuild = reloadOnBuild;
+const reload = () => gulp.src(DIST_FOLDER).pipe($.connect.reload());
 
 function watch() {
-  gulp.watch(['src/**/*', 'resources/**/*'], gulp.series(build, reloadOnBuild));
+  gulp.watch(['src/**/*', 'resources/**/*'], gulp.series(build, reload));
 }
-exports.watch = watch;
 
 function serveAndOpen() {
   $.connect.server({
@@ -98,11 +95,6 @@ function serveAndOpen() {
   });
   gulp.src(__filename).pipe($.open({ uri: `http://localhost:${PORT}` }));
 }
-exports.serveAndOpen = serveAndOpen;
 
-const serve = gulp.series(
-  build,
-  reloadOnBuild,
-  gulp.parallel(watch, serveAndOpen)
-);
+const serve = gulp.series(build, reload, gulp.parallel(watch, serveAndOpen));
 gulp.task('serve', serve);
