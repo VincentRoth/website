@@ -6,7 +6,3 @@ function toggleHeader() {
     $header.style.width = '0px';
   }
 }
-
-/* document.addEventListener('DOMContentLoaded', function() {
-  toggleHeader();
-}); */

@@ -3,6 +3,10 @@
 
 <head>
     @@include('../../partial/meta.partial.html')
+    <!-- build:js /assets/js/games/pong.js -->
+    <script type="text/javascript" src="./game.js"></script>
+    <script type="text/javascript" src="./ball.js"></script>
+    <!-- endbuild -->
     <title>${{common.title}} - ${{pong.title}}</title>
 </head>
 
@@ -11,6 +15,7 @@
     <main>
         <h1>${{pong.title}}</h1>
         <p>${{common.in-construction}}</p>
+        <canvas id="game"></canvas>
     </main>
 </body>
 
