@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "modernizr": {
+      "options": ["setClasses"],
+      "tests": ["fullscreen"]
+    }
+  }
+}

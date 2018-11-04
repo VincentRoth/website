@@ -1,9 +1,11 @@
 const path = require('path');
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
+const config = require('./gulpconf.json');
 
 const DIST_FOLDER = 'dist';
 const DIST_ASSETS_FOLDER = `${DIST_FOLDER}/assets`;
+const DIST_MODERNIZR_FOLDER = `${DIST_ASSETS_FOLDER}/js`;
 
 const SRC_HTML = 'src/**/*.html';
 const SRC_CSS = 'src/**/*.less';
@@ -20,6 +22,13 @@ function clean() {
 
 function assets() {
   return gulp.src(SRC_ASSETS).pipe(gulp.dest(DIST_ASSETS_FOLDER));
+}
+
+function modernizr() {
+  return gulp
+    .src(SRC_JS)
+    .pipe($.modernizr('modernizr.js', config.plugins.modernizr))
+    .pipe(gulp.dest(DIST_MODERNIZR_FOLDER));
 }
 
 function html() {
@@ -76,7 +85,13 @@ function js() {
     .pipe(gulp.dest(DIST_FOLDER));
 }
 
-const build = gulp.series(clean, assets, gulp.parallel(html, less), js);
+const build = gulp.series(
+  clean,
+  assets,
+  //modernizr,
+  gulp.parallel(html, less),
+  js
+);
 gulp.task('build', build);
 gulp.task('default', build);
 
