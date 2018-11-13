@@ -3,8 +3,10 @@ class Ball {
     this.context = context;
     this.radius = radius;
     this.color = color;
-    this.position = position;
-    this.speed = speed;
+    this.startPosition = position.copy();
+    this.position = position.copy();
+    this.startSpeed = speed.copy();
+    this.speed = speed.copy();
     this.initialSpeedX = speed.x;
   }
 
@@ -64,10 +66,15 @@ class Ball {
     }
   }
 
-  service(position) {
+  reset() {
+    this.position = this.startPosition.copy();
+    this.speed = this.startSpeed.copy();
+  }
+
+  service() {
+    this.reset();
     this.speed.x = -1 * Math.sign(this.speed.x) * this.initialSpeedX;
     this.speed.y = 0;
-    this.position = position;
   }
 
   draw() {

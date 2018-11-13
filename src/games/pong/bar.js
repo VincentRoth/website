@@ -2,8 +2,13 @@ class Bar {
   constructor(context, color, position, dimension) {
     this.context = context;
     this.color = color;
-    this.position = position;
+    this.startPosition = position.copy()
+    this.position = position.copy();
     this.dimension = dimension;
+  }
+
+  reset() {
+    this.position = this.startPosition.copy();
   }
 
   move(speed, topLimit, bottomLimit) {

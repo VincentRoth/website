@@ -15,7 +15,7 @@ class Pong {
       this.context,
       this.config.ball.radius,
       this.config.color.main,
-      new Point(this.canvas.width / 2, this.canvas.height / 2),
+      this.config.center.copy(),
       new Vector(this.canvas.width / 150, 0)
     );
 
@@ -66,7 +66,12 @@ class Pong {
       bar: {
         dimension: new Vector(this.canvas.width / 100, this.canvas.height / 6)
       },
-      winningScore: 7
+      winningScore: 7,
+      text: {
+        start: document.getElementById('game-start').innerText,
+        leftPlayerWon: document.getElementById('game-left-player-won').innerText,
+        rightPlayerWon: document.getElementById('game-right-player-won').innerText
+      }
     };
     this.isGameOver = true;
     this.player1 = {
@@ -81,6 +86,15 @@ class Pong {
   }
 
   configureCommands() {
+    const startGame = () => {
+      this.isGameOver = false;
+      this.player1.score = 0;
+      this.player2.score = 0;
+      this.ball.reset();
+      this.bar1.reset();
+      this.bar2.reset();
+    }
+
     this.canvas.addEventListener('dblclick', () => {
       // Fullscreen still not implemented as defined in spcecification by current browsers, support only to Mozilla Firefox here
       // if (document.fullscreenEnabled) {
@@ -118,7 +132,7 @@ class Pong {
           break;
         case 'Enter':
           if (this.isGameOver) {
-            this.isGameOver = false;
+            startGame();
           } else {
             this.player2.auto = !this.player2.auto;
           }
@@ -143,10 +157,7 @@ class Pong {
     });
     this.canvas.addEventListener('click', () => {
       if (this.isGameOver) {
-        this.isGameOver = false;
-        this.player1.score = 0;
-        this.player2.score = 0;
-        this.ball.position;
+        startGame();
       }
     });
   }
@@ -176,40 +187,40 @@ class Pong {
   }
 
   drawScores() {
+    const font = 'Press Start 2P';
     const fontSize = this.canvas.height / 15;
     const heightOffset = (fontSize * 3) / 4;
-    this.context.font = fontSize + 'pt "Press Start 2P"';
     this.context.fillStyle = this.config.color.main;
 
     if (this.isGameOver) {
-      const leftPlayerWon = 'Left Player Won';
-      const rightPlayerWon = 'Right Player Won';
-      const startText = 'Click to start';
-
       if (this.player1.score >= this.config.winningScore) {
-        const metrics = this.context.measureText(leftPlayerWon);
+        DrawUtil.computeFontSize(this.context, this.config.text.leftPlayerWon, font, fontSize, this.canvas.width);
+        const metrics = this.context.measureText(this.config.text.leftPlayerWon);
         this.context.fillText(
-          leftPlayerWon,
+          this.config.text.leftPlayerWon,
           this.canvas.width / 2 - metrics.width / 2,
           (this.canvas.height * 2) / 3
         );
       } else if (this.player2.score >= this.config.winningScore) {
-        const metrics = this.context.measureText(rightPlayerWon);
+        DrawUtil.computeFontSize(this.context, this.config.text.rightPlayerWon, font, fontSize, this.canvas.width);
+        const metrics = this.context.measureText(this.config.text.rightPlayerWon);
         this.context.fillText(
-          rightPlayerWon,
+          this.config.text.rightPlayerWon,
           this.canvas.width / 2 - metrics.width / 2,
           (this.canvas.height * 2) / 3
         );
       }
 
-      const metrics = this.context.measureText(startText);
+      DrawUtil.computeFontSize(this.context, this.config.text.start, font, fontSize, this.canvas.width);
+      const metrics = this.context.measureText(this.config.text.start);
       this.context.fillText(
-        startText,
+        this.config.text.start,
         this.canvas.width / 2 - metrics.width / 2,
         this.canvas.height / 2
       );
     } else {
-      var metrics = this.context.measureText(this.player1.score);
+      DrawUtil.setFont(this.context, font, fontSize);
+      let metrics = this.context.measureText(this.player1.score);
       this.context.fillText(
         this.player1.score,
         (this.canvas.width * 3) / 10 - metrics.width / 2,
@@ -264,14 +275,10 @@ class Pong {
 
     if (this.ball.isAfterX(this.canvas.width)) {
       this.player1.score++;
-      this.ball.service(
-        new Point(this.canvas.width / 2, this.canvas.height / 2)
-      );
+      this.ball.service();
     } else if (this.ball.isBeforeX(0)) {
       this.player2.score++;
-      this.ball.service(
-        new Point(this.canvas.width / 2, this.canvas.height / 2)
-      );
+      this.ball.service();
     }
 
     if (this.player1.score >= this.config.winningScore) {

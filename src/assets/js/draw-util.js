@@ -7,12 +7,12 @@ class Point {
     this.x += vector.x;
     this.y += vector.y;
   }
-  static add(point, vector) {
-    return new Point(point.x + vector.x, point.y + vector.y);
+  copy() {
+    return new Point(this.x, this.y);
   }
 }
 
-class Vector extends Point {}
+class Vector extends Point { }
 
 class DrawUtil {
   static filledCircle(context, color, position, radius) {
@@ -48,5 +48,15 @@ class DrawUtil {
       Math.trunc(end.x),
       Math.trunc(end.y)
     );
+  }
+  static setFont(context, font, size) {
+    context.font = `${Math.trunc(size)}pt "${font}"`;
+  }
+  static computeFontSize(context, text, font, size, limit) {
+    DrawUtil.setFont(context, font, size);
+    const metrics = context.measureText(text);
+    if (metrics.width > limit) {
+      DrawUtil.computeFontSize(context, text, font, size - 1, limit)
+    }
   }
 }
