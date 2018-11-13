@@ -6,6 +6,10 @@ class Pong {
     // based on real screen size
     this.canvas.width = window.screen.width;
     this.canvas.height = window.screen.height;
+    if (this.canvas.width < this.canvas.height) {
+      this.canvas.width = window.screen.height;
+      this.canvas.height = window.screen.width;
+    }
     this.context = this.canvas.getContext('2d');
 
     this.initConfig();
