@@ -7,7 +7,6 @@ class Ball {
     this.position = position.copy();
     this.startSpeed = speed.copy();
     this.speed = speed.copy();
-    this.initialSpeedX = speed.x;
   }
 
   move() {
@@ -72,9 +71,9 @@ class Ball {
   }
 
   service() {
+    const inversedSpeedDirection = -1 * Math.sign(this.speed.x);
     this.reset();
-    this.speed.x = -1 * Math.sign(this.speed.x) * this.initialSpeedX;
-    this.speed.y = 0;
+    this.speed.x = inversedSpeedDirection * this.speed.x;
   }
 
   draw() {
