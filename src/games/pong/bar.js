@@ -17,7 +17,13 @@ class Bar {
 
   moveTo(target, topLimit, bottomLimit) {
     const deltaY = target.y - this.position.y - this.dimension.y / 2;
-    this.move(new Vector(0, deltaY / 30), topLimit, bottomLimit);
+    const height = bottomLimit - topLimit;
+    const speedY = (Math.sign(deltaY) * height) / 80;
+    if (Math.abs(speedY) < Math.abs(deltaY)) {
+      this.move(new Vector(0, speedY), topLimit, bottomLimit);
+    } else {
+      this.move(new Vector(0, deltaY), topLimit, bottomLimit);
+    }
   }
 
   draw() {

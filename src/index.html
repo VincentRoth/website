@@ -2,17 +2,17 @@
 <html>
 
 <head>
-    @@include('./partial/meta.partial.html')
-    <title>${{common.title}}</title>
+  @@include('./partial/meta.partial.html', {"relativePath":""})
+  <title>${{common.title}}</title>
 </head>
 
 <body>
-    @@include('./partial/header.partial.html', {"path": "/"})
-    <main>
-        <h1>${{home.title}}</h1>
-        <p>${{home.introduction}}</p>
-        <p>${{home.content}}</p>
-    </main>
+  @@include('./partial/header.partial.html', {"path": "/"})
+  <main>
+    <h1>${{home.title}}</h1>
+    <p>${{home.introduction}}</p>
+    <p>${{home.content}}</p>
+  </main>
 </body>
 
 </html>

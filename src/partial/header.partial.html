@@ -1,38 +1,38 @@
 <header>
-    <a href="javascript:void(0)" class="close-header" onclick="toggleHeader()">&times;</a>
-    <a class="profile" href="@@webRoot">
-        <img src="/assets/images/profile.jpg">
-    </a>
-    <h1>${{common.title}}<sup>&copy;</sup></h1>
-    <nav>
+  <a href="javascript:void(0)" class="close-header" onclick="toggleHeader()">&times;</a>
+  <a class="profile" href="@@webRoot">
+    <img src="/assets/images/profile.jpg">
+  </a>
+  <h1>${{common.title}}<sup>&copy;</sup></h1>
+  <nav>
+    <ul>
+      <li>
+        ${{common.menu.entry.game}}
         <ul>
-            <li>
-                ${{common.menu.entry.game}}
-                <ul>
-                    <li>
-                        <a href="@@webRoot/games/pong">${{common.menu.link.game.pong}}</a>
-                    </li>
-                    <!-- <li>
+          <li>
+            <a href="@@webRoot/games/pong">${{common.menu.link.game.pong}}</a>
+          </li>
+          <!-- <li>
                         <a>${{common.menu.link.game.pso3-rules}}</a>
                     </li> -->
-                </ul>
-            </li>
-            <li>
-                ${{common.menu.entry.tools}}
-                <ul>
-                    <li>
-                        <a>${{common.to-come}}</a>
-                        <!-- <a>${{common.menu.link.tools.pso3-card}}</a> -->
-                    </li>
-                    <!-- <li>
+        </ul>
+      </li>
+      <li>
+        ${{common.menu.entry.tools}}
+        <ul>
+          <li>
+            <a>${{common.to-come}}</a>
+            <!-- <a>${{common.menu.link.tools.pso3-card}}</a> -->
+          </li>
+          <!-- <li>
                         <a>${{common.menu.link.tools.zombicide-id-card}}</a>
                     </li>
                     <li>
                         <a>${{common.menu.link.tools.eclipse-phase}}</a>
                     </li> -->
-                </ul>
-            </li>
-            <!-- <li>
+        </ul>
+      </li>
+      <!-- <li>
                 ${{common.menu.entry.simulator}}
                 <ul>
                     <li>
@@ -40,33 +40,33 @@
                     </li>
                 </ul>
             </li> -->
-        </ul>
-        <ul class="languages">
-            <li>
-                <a href="@@path">
-                    <img src="/assets/images/flags/france.png">
-                </a>
-            </li>
-            <li>
-                <a href="/en@@path">
-                    <img src="/assets/images/flags/united-kingdom.png">
-                </a>
-            </li>
-        </ul>
-        <ul class="external-links">
-            <li>
-                <a href="https://github.com/VincentRoth/" target="_about">
-                    <img src="/assets/images/icons/github.png">
-                </a>
-            </li>
-            <li>
-                <a href="https://www.linkedin.com/in/vincent-roth/" target="_about">
-                    <img src="/assets/images/icons/linkedin.png">
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <p>${{common.menu.no-cookie}}</p>
+    </ul>
+    <ul class="languages">
+      <li>
+        <a href="@@path">
+          <img src="/assets/images/flags/france.png">
+        </a>
+      </li>
+      <li>
+        <a href="/en@@path">
+          <img src="/assets/images/flags/united-kingdom.png">
+        </a>
+      </li>
+    </ul>
+    <ul class="external-links">
+      <li>
+        <a href="https://github.com/VincentRoth/" target="_about">
+          <img src="/assets/images/icons/github.png">
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/vincent-roth/" target="_about">
+          <img src="/assets/images/icons/linkedin.png">
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <p>${{common.menu.no-cookie}}</p>
 </header>
 
 <a href="javascript:void(0)" class="open-header" onclick="toggleHeader()">&#9776;</a>

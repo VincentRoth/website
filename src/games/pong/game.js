@@ -69,9 +69,14 @@ class Pong {
       winningScore: 7
     };
     this.isGameOver = true;
-    this.score = {
-      left: 0,
-      right: 0
+    this.player1 = {
+      position: null,
+      score: 0
+    };
+    this.player2 = {
+      position: null,
+      score: 0,
+      auto: true
     };
   }
 
@@ -92,22 +97,55 @@ class Pong {
     });
     this.canvas.addEventListener('mousemove', event => {
       const rect = this.canvas.getBoundingClientRect();
-      this.bar1.moveTo(
-        new Point(
-          ((event.clientX - rect.left) * this.canvas.width) / rect.width,
-          ((event.clientY - rect.top) * this.canvas.height) / rect.height
-        ),
-        0,
-        this.canvas.height
+      this.player1.position = new Point(
+        ((event.clientX - rect.left) * this.canvas.width) / rect.width,
+        ((event.clientY - rect.top) * this.canvas.height) / rect.height
       );
+    });
+    window.addEventListener('keydown', event => {
+      switch (event.code) {
+        case 'KeyW':
+          this.player1.position = new Point(0, 0);
+          break;
+        case 'KeyS':
+          this.player1.position = new Point(0, this.canvas.height);
+          break;
+        case 'KeyI':
+          this.player2.position = new Point(0, 0);
+          break;
+        case 'KeyK':
+          this.player2.position = new Point(0, this.canvas.height);
+          break;
+        case 'Enter':
+          if (this.isGameOver) {
+            this.isGameOver = false;
+          } else {
+            this.player2.auto = !this.player2.auto;
+          }
+          break;
+        default:
+          break;
+      }
+    });
+    window.addEventListener('keyup', event => {
+      switch (event.code) {
+        case 'KeyW':
+        case 'KeyS':
+          this.player1.position = null;
+          break;
+        case 'KeyI':
+        case 'KeyK':
+          this.player2.position = null;
+          break;
+        default:
+          break;
+      }
     });
     this.canvas.addEventListener('click', () => {
       if (this.isGameOver) {
         this.isGameOver = false;
-        this.score = {
-          left: 0,
-          right: 0
-        };
+        this.player1.score = 0;
+        this.player2.score = 0;
         this.ball.position;
       }
     });
@@ -148,14 +186,14 @@ class Pong {
       const rightPlayerWon = 'Right Player Won';
       const startText = 'Click to start';
 
-      if (this.score.left >= this.config.winningScore) {
+      if (this.player1.score >= this.config.winningScore) {
         const metrics = this.context.measureText(leftPlayerWon);
         this.context.fillText(
           leftPlayerWon,
           this.canvas.width / 2 - metrics.width / 2,
           (this.canvas.height * 2) / 3
         );
-      } else if (this.score.right >= this.config.winningScore) {
+      } else if (this.player2.score >= this.config.winningScore) {
         const metrics = this.context.measureText(rightPlayerWon);
         this.context.fillText(
           rightPlayerWon,
@@ -171,15 +209,15 @@ class Pong {
         this.canvas.height / 2
       );
     } else {
-      var metrics = this.context.measureText(this.score.left);
+      var metrics = this.context.measureText(this.player1.score);
       this.context.fillText(
-        this.score.left,
+        this.player1.score,
         (this.canvas.width * 3) / 10 - metrics.width / 2,
         this.canvas.height / 2 + heightOffset
       );
-      metrics = this.context.measureText(this.score.left);
+      metrics = this.context.measureText(this.player2.score);
       this.context.fillText(
-        this.score.right,
+        this.player2.score,
         (this.canvas.width * 7) / 10 - metrics.width / 2,
         this.canvas.height / 2 + heightOffset
       );
@@ -210,26 +248,35 @@ class Pong {
 
   move() {
     this.ball.move();
-    this.bar2.moveTo(this.ball.position);
+
+    if (this.player1.position) {
+      this.bar1.moveTo(this.player1.position, 0, this.canvas.height);
+    }
+
+    if (this.player2.auto) {
+      this.bar2.moveTo(this.ball.position, 0, this.canvas.height);
+    } else if (this.player2.position) {
+      this.bar2.moveTo(this.player2.position, 0, this.canvas.height);
+    }
 
     this.ball.bounceOnWalls(this.config.start, this.config.end);
     this.ball.bounceOnBars(this.bar1, this.bar2);
 
     if (this.ball.isAfterX(this.canvas.width)) {
-      this.score.left++;
+      this.player1.score++;
       this.ball.service(
         new Point(this.canvas.width / 2, this.canvas.height / 2)
       );
     } else if (this.ball.isBeforeX(0)) {
-      this.score.right++;
+      this.player2.score++;
       this.ball.service(
         new Point(this.canvas.width / 2, this.canvas.height / 2)
       );
     }
 
-    if (this.score.left >= this.config.winningScore) {
+    if (this.player1.score >= this.config.winningScore) {
       this.isGameOver = true;
-    } else if (this.score.right >= this.config.winningScore) {
+    } else if (this.player2.score >= this.config.winningScore) {
       this.isGameOver = true;
     }
   }
@@ -242,6 +289,6 @@ class Pong {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   new Pong();
 });

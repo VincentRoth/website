@@ -65,7 +65,7 @@ class Ball {
   }
 
   service(position) {
-    this.speed.x = this.initialSpeedX;
+    this.speed.x = -1 * Math.sign(this.speed.x) * this.initialSpeedX;
     this.speed.y = 0;
     this.position = position;
   }

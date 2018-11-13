@@ -2,23 +2,23 @@
 <html>
 
 <head>
-    @@include('../../partial/meta.partial.html')
-    <!-- build:js /assets/js/games/pong.js -->
-    <script type="text/javascript" src="../../assets/js/draw-util.js"></script>
-    <script type="text/javascript" src="./ball.js"></script>
-    <script type="text/javascript" src="./bar.js"></script>
-    <script type="text/javascript" src="./game.js"></script>
-    <!-- endbuild -->
-    <title>${{common.title}} - ${{pong.title}}</title>
+  @@include('../../partial/meta.partial.html', {"relativePath":"../../"})
+  <!-- build:js /assets/js/games/pong.js -->
+  <script type="text/javascript" src="../../assets/js/draw-util.js"></script>
+  <script type="text/javascript" src="./ball.js"></script>
+  <script type="text/javascript" src="./bar.js"></script>
+  <script type="text/javascript" src="./game.js"></script>
+  <!-- endbuild -->
+  <title>${{common.title}} - ${{pong.title}}</title>
 </head>
 
 <body>
-    @@include('../../partial/header.partial.html', {"path": "/games/pong"})
-    <main>
-        <h1>${{pong.title}}</h1>
-        <p>${{common.in-construction}}</p>
-        <canvas id="game"></canvas>
-    </main>
+  @@include('../../partial/header.partial.html', {"path": "/games/pong"})
+  <main>
+    <h1>${{pong.title}}</h1>
+    <p>${{pong.description}}</p>
+    <canvas id="game"></canvas>
+  </main>
 </body>
 
 </html>
