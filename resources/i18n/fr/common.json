@@ -1,5 +1,15 @@
 {
+  "language": "fr",
   "title": "Vincent ROTH",
+  "image": {
+    "profile": "Revenir à la page d'accueil",
+    "github": "Voir mon profil GitHub",
+    "linkedin": "Voir mon profil LinkedIn",
+    "flag": {
+      "french": "Changer la langue pour le français",
+      "united-kingdom": "Change for English language"
+    }
+  },
   "menu": {
     "entry": {
       "game": "Jeux",

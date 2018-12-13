@@ -1,4 +1,7 @@
 {
+  "meta": {
+    "description": "Pong game is a simplified tennis game. You can play with a friend or alone against a simple opponent."
+  },
   "title": "Pong",
   "description": "To play this game, you can use both mouse or keyboard on your own or with a friend.\nOr with a touch screen on your own.\nSend the ball in the oponent goal to score points. Game is over at 7 points.\n\nStart game: click on the game screen or press Enter.\nLeft paddle: move with the mouse or using W / S.\nRight paddle: move automaticaly or using I / K after pressing Enter in game.\nFull screen: double click to active/deactivate the full screen mode. Only available using Mozilla Firefox..",
   "start": "Click to start",
