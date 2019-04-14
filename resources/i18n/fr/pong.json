@@ -3,7 +3,7 @@
     "description": "Pong est un jeu de simulation de tennis simplifié. Vous pouvez jouer avec un ami ou seul contre un adversaire simple."
   },
   "title": "Pong",
-  "description": "Pour jouer à ce jeu, vous pouvez utilisez la souris et/ou le clavier, seul ou avec un ami.\nOu encore seul sur votre écran tactile.\nEnvoyez la balle dans le camp adverse pour marquer des points. A 7 points la partie est gagnée !\n\nLancer le jeu : cliquer sur l'écran ou appuyer sur Entrée.\nRaquette gauche : déplacement à la souris ou avec Z / S.\nRaquette droite : déplacement automatique ou avec I / K après avoir appuyé sur Entrée en jeu.\nPlein écran : double cliquer pour activer et désactiver le mode plein écran. Uniquement sur Mozilla Firefox.",
+  "description": "Pour jouer à ce jeu, vous pouvez utilisez la souris et/ou le clavier, seul ou avec un ami.\nOu encore seul sur votre écran tactile.\nEnvoyez la balle dans le camp adverse pour marquer des points. A 7 points la partie est gagnée !\n\nLancer le jeu : cliquer sur l'écran ou appuyer sur Entrée.\nRaquette gauche : déplacement à la souris ou avec Z / S.\nRaquette droite : déplacement automatique ou avec I / K après avoir appuyé sur Entrée en jeu.\nPlein écran : double cliquer pour activer et désactiver le mode plein écran. Uniquement sur Chrome ou Firefox.",
   "start": "Cliquer pour jouer",
   "leftPlayerWon": "Le joueur de gauche gagne",
   "rightPlayerWon": "Le joueur de droite gagne"

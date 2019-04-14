@@ -100,16 +100,13 @@ class Pong {
     }
 
     this.canvas.addEventListener('dblclick', () => {
-      // Fullscreen still not implemented as defined in spcecification by current browsers, support only to Mozilla Firefox here
-      // if (document.fullscreenEnabled) {
-      if (document.mozFullScreenEnabled) {
-        //if (!document.fullscreenElement) {
-        if (!document.mozFullScreenElement) {
-          // this.canvas.requestFullscreen();
-          this.canvas.mozRequestFullScreen();
+      // Fullscreen implemented as defined in specification - https://caniuse.com/#feat=fullscreen
+      // Actually only work for Firefox and Chrome
+      if (document.fullscreenEnabled) {
+        if (!document.fullscreenElement) {
+          this.canvas.requestFullscreen();
         } else {
-          //document.exitFullscreen();
-          document.mozCancelFullScreen();
+          document.exitFullscreen();
         }
       }
     });
