@@ -12,7 +12,7 @@ class Point {
   }
 }
 
-class Vector extends Point { }
+class Vector extends Point {}
 
 class DrawUtil {
   static filledCircle(context, color, position, radius) {
@@ -27,9 +27,9 @@ class DrawUtil {
     );
     context.fill();
   }
-  static circle(context, color, position, radius, thickness) {
+  static circle(context, color, position, radius, thickness = 2) {
     context.strokeStyle = color;
-    context.lineWidth = thickness || 2;
+    context.lineWidth = thickness;
     context.beginPath();
     context.arc(
       Math.trunc(position.x),

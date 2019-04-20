@@ -44,7 +44,7 @@ class Pong {
   }
 
   initConfig() {
-    const netThickness = Math.max(this.canvas.width / 200, 2);
+    const netThickness = Math.trunc(Math.max(this.canvas.width / 200, 2));
     this.config = {
       color: {
         background: 'black',
@@ -99,17 +99,18 @@ class Pong {
       this.bar2.reset();
     }
 
-    this.canvas.addEventListener('dblclick', () => {
-      // Fullscreen implemented as defined in specification - https://caniuse.com/#feat=fullscreen
-      // Actually only work for Firefox and Chrome
-      if (document.fullscreenEnabled) {
+    if (document.fullscreenEnabled) {
+      this.canvas.addEventListener('dblclick', () => {
+        // Fullscreen implemented as defined in specification - https://caniuse.com/#feat=fullscreen
+        // Actually only work for Firefox and Chrome
         if (!document.fullscreenElement) {
           this.canvas.requestFullscreen();
         } else {
           document.exitFullscreen();
         }
       }
-    });
+      );
+    }
     this.canvas.addEventListener('mousemove', event => {
       const rect = this.canvas.getBoundingClientRect();
       this.player1.position = new Point(
@@ -187,13 +188,14 @@ class Pong {
     );
   }
 
-  drawScores() {
+  drawScoresAndText() {
     const font = 'Press Start 2P';
     const fontSize = this.canvas.height / 15;
     const heightOffset = (fontSize * 3) / 4;
     this.context.fillStyle = this.config.color.main;
 
     if (this.isGameOver) {
+      // Draw text for winner
       if (this.player1.score >= this.config.winningScore) {
         DrawUtil.computeFontSize(this.context, this.config.text.leftPlayerWon, font, fontSize, this.canvas.width);
         const metrics = this.context.measureText(this.config.text.leftPlayerWon);
@@ -212,6 +214,7 @@ class Pong {
         );
       }
 
+      // Draw start text
       DrawUtil.computeFontSize(this.context, this.config.text.start, font, fontSize, this.canvas.width);
       const metrics = this.context.measureText(this.config.text.start);
       this.context.fillText(
@@ -220,6 +223,7 @@ class Pong {
         this.canvas.height / 2
       );
     } else {
+      // Draw scores
       DrawUtil.setFont(this.context, font, fontSize);
       let metrics = this.context.measureText(this.player1.score);
       this.context.fillText(
@@ -249,7 +253,7 @@ class Pong {
       this.drawNet();
     }
 
-    this.drawScores();
+    this.drawScoresAndText();
 
     if (!this.isGameOver) {
       this.ball.draw();
@@ -258,34 +262,42 @@ class Pong {
     }
   }
 
+  checkScoreAndServeBall() {
+    // Check if game is over
+    if (this.player1.score >= this.config.winningScore
+      || this.player2.score >= this.config.winningScore) {
+      this.isGameOver = true;
+    } else {
+      this.ball.service();
+    }
+  }
+
   move() {
     this.ball.move();
 
+    // Move the player 1 bar to the target position
     if (this.player1.position) {
       this.bar1.moveTo(this.player1.position, 0, this.canvas.height);
     }
 
+    // Move the player 2 bar to follow the bar for auto or to the target position
     if (this.player2.auto) {
       this.bar2.moveTo(this.ball.position, 0, this.canvas.height);
     } else if (this.player2.position) {
       this.bar2.moveTo(this.player2.position, 0, this.canvas.height);
     }
 
+    // Test ball bouncing on lateral walls and the players' bars
     this.ball.bounceOnWalls(this.config.start, this.config.end);
     this.ball.bounceOnBars(this.bar1, this.bar2);
 
+    // Check the ball is out of the canvas and update scores
     if (this.ball.isAfterX(this.canvas.width)) {
       this.player1.score++;
-      this.ball.service();
+      this.checkScoreAndServeBall();
     } else if (this.ball.isBeforeX(0)) {
       this.player2.score++;
-      this.ball.service();
-    }
-
-    if (this.player1.score >= this.config.winningScore) {
-      this.isGameOver = true;
-    } else if (this.player2.score >= this.config.winningScore) {
-      this.isGameOver = true;
+      this.checkScoreAndServeBall();
     }
   }
 

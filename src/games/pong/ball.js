@@ -28,27 +28,22 @@ class Ball {
     );
   }
 
+
+
   bounceOnBars(bar1, bar2) {
-    if (
-      this.isBeforeX(bar1.position.x + bar1.dimension.x) &&
-      this.isWithinYInterval(
-        bar1.position.y,
-        bar1.position.y + bar1.dimension.y
-      ) &&
-      this.speed.x < 0
-    ) {
+    if (this.isBeforeX(bar1.position.x + bar1.dimension.x)
+      && this.isWithinYInterval(bar1.position.y, bar1.position.y + bar1.dimension.y)
+      && this.speed.x < 0) {
+
       this.speed.x *= -1;
       this.speed.x++;
       const deltaY = this.position.y - (bar1.position.y + bar1.dimension.y / 2);
       this.speed.y = deltaY * 0.3;
-    } else if (
-      this.isAfterX(bar2.position.x) &&
-      this.isWithinYInterval(
-        bar2.position.y,
-        bar2.position.y + bar2.dimension.y
-      ) &&
-      this.speed.x > 0
-    ) {
+
+    } else if (this.isAfterX(bar2.position.x)
+      && this.isWithinYInterval(bar2.position.y, bar2.position.y + bar2.dimension.y)
+      && this.speed.x > 0) {
+
       this.speed.x *= -1;
       this.speed.x++;
       const deltaY = this.position.y - (bar2.position.y + bar2.dimension.y / 2);
@@ -57,10 +52,8 @@ class Ball {
   }
 
   bounceOnWalls(start, end) {
-    if (
-      this.position.y - this.radius < start.y ||
-      end.y < this.position.y + this.radius
-    ) {
+    if (this.position.y - this.radius < start.y
+      || end.y < this.position.y + this.radius) {
       this.speed.y *= -1;
     }
   }
