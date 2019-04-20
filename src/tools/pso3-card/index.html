@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="${{common.language}}">
+
+<head>
+  @@include('../../partial/meta.partial.html', {"relativePath":"../../"})
+  <!-- build:js /assets/js/tools/pso3-card.js defer -->
+  <script type="text/javascript" src="../../assets/js/draw-util.js"></script>
+  <!-- endbuild -->
+  <title>${{common.title}} - ${{pso3-card.title}}</title>
+  <meta name="Description" content="${{pso3-card.meta.description}}">
+</head>
+
+<body>
+  @@include('../../partial/header.partial.html', {"path": "/tools/pso3-card"})
+  <main>
+    <h1>${{pso3-card.title}}</h1>
+    <p>${{pso3-card.description}}</p>
+    <canvas id="card"></canvas>
+  </main>
+</body>
+
+</html>
