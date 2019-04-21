@@ -1,0 +1,43 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": false
+  },
+  "extends": "standard",
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "script"
+  },
+  "rules": {
+    "array-bracket-newline": ["error", { "multiline": true, "minItems": 6 }],
+    "array-element-newline": ["error", { "multiline": true, "minItems": 6 }],
+    "curly": ["error", "all"],
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1,
+        "VariableDeclarator": "first",
+        "outerIIFEBody": 1,
+        "MemberExpression": 1,
+        "FunctionDeclaration": { "parameters": "first", "body": 1 },
+        "FunctionExpression": { "parameters": "first", "body": 1 },
+        "CallExpression": { "arguments": "first" },
+        "ArrayExpression": "first",
+        "ObjectExpression": "first",
+        "ImportDeclaration": "first",
+        "flatTernaryExpressions": false,
+        "ignoreComments": false
+      }
+    ],
+    "linebreak-style": ["error", "windows"],
+    "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
+    "operator-linebreak": [2, "before"],
+    "semi": ["error", "always"]
+  }
+}

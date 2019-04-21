@@ -1,7 +1,9 @@
+/* global Ball Bar DrawUtil Point Vector */
+
 const FPS = 30;
 
 class Pong {
-  constructor() {
+  constructor () {
     this.canvas = document.getElementById('game');
     // based on real screen size
     this.canvas.width = window.screen.width;
@@ -39,11 +41,13 @@ class Pong {
       ),
       this.config.bar.dimension
     );
+  }
 
+  run () {
     setInterval(() => this.render(), 1000 / FPS);
   }
 
-  initConfig() {
+  initConfig () {
     const netThickness = Math.trunc(Math.max(this.canvas.width / 200, 2));
     this.config = {
       color: {
@@ -58,10 +62,7 @@ class Pong {
         top: new Point(this.canvas.width / 2 - netThickness / 2, 0),
         centerTop: new Point(netThickness, (this.canvas.height * 2) / 5),
         radius: this.canvas.height / 10,
-        centerBottom: new Point(
-          this.canvas.width / 2 - netThickness / 2,
-          (this.canvas.height * 3) / 5
-        ),
+        centerBottom: new Point(this.canvas.width / 2 - netThickness / 2, (this.canvas.height * 3) / 5),
         bottom: new Point(netThickness, this.canvas.height)
       },
       ball: {
@@ -89,7 +90,7 @@ class Pong {
     };
   }
 
-  configureCommands() {
+  configureCommands () {
     const startGame = () => {
       this.isGameOver = false;
       this.player1.score = 0;
@@ -97,7 +98,7 @@ class Pong {
       this.ball.reset();
       this.bar1.reset();
       this.bar2.reset();
-    }
+    };
 
     if (document.fullscreenEnabled) {
       this.canvas.addEventListener('dblclick', () => {
@@ -108,8 +109,7 @@ class Pong {
         } else {
           document.exitFullscreen();
         }
-      }
-      );
+      });
     }
     this.canvas.addEventListener('mousemove', event => {
       const rect = this.canvas.getBoundingClientRect();
@@ -164,7 +164,7 @@ class Pong {
     });
   }
 
-  drawNet() {
+  drawNet () {
     DrawUtil.filledRect(
       this.context,
       this.config.color.main,
@@ -188,7 +188,7 @@ class Pong {
     );
   }
 
-  drawScoresAndText() {
+  drawScoresAndText () {
     const font = 'Press Start 2P';
     const fontSize = this.canvas.height / 15;
     const heightOffset = (fontSize * 3) / 4;
@@ -217,11 +217,7 @@ class Pong {
       // Draw start text
       DrawUtil.computeFontSize(this.context, this.config.text.start, font, fontSize, this.canvas.width);
       const metrics = this.context.measureText(this.config.text.start);
-      this.context.fillText(
-        this.config.text.start,
-        this.canvas.width / 2 - metrics.width / 2,
-        this.canvas.height / 2
-      );
+      this.context.fillText(this.config.text.start, this.canvas.width / 2 - metrics.width / 2, this.canvas.height / 2);
     } else {
       // Draw scores
       DrawUtil.setFont(this.context, font, fontSize);
@@ -240,14 +236,9 @@ class Pong {
     }
   }
 
-  draw() {
+  draw () {
     // Clear canvas
-    DrawUtil.filledRect(
-      this.context,
-      this.config.color.background,
-      this.config.start,
-      this.config.end
-    );
+    DrawUtil.filledRect(this.context, this.config.color.background, this.config.start, this.config.end);
 
     if (!this.isGameOver) {
       this.drawNet();
@@ -262,17 +253,16 @@ class Pong {
     }
   }
 
-  checkScoreAndServeBall() {
+  checkScoreAndServeBall () {
     // Check if game is over
-    if (this.player1.score >= this.config.winningScore
-      || this.player2.score >= this.config.winningScore) {
+    if (this.player1.score >= this.config.winningScore || this.player2.score >= this.config.winningScore) {
       this.isGameOver = true;
     } else {
       this.ball.service();
     }
   }
 
-  move() {
+  move () {
     this.ball.move();
 
     // Move the player 1 bar to the target position
@@ -301,7 +291,7 @@ class Pong {
     }
   }
 
-  render() {
+  render () {
     if (!this.isGameOver) {
       this.move();
     }
@@ -310,5 +300,6 @@ class Pong {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  new Pong();
+  const game = new Pong();
+  game.run();
 });

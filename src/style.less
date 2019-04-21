@@ -7,18 +7,19 @@
 @color-quint: #368f8b;
 
 @font-face {
-  font-family: 'Sans Forgetica';
+  font-family: "Sans Forgetica";
   font-display: swap;
-  src: url('/assets/fonts/SansForgetica-Regular.otf') format('truetype');
+  src: url("/assets/fonts/SansForgetica-Regular.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
-  font-family: 'Press Start 2P';
+  font-family: "Press Start 2P";
   font-display: swap;
-  src: url('/assets/fonts/pressstart2p-webfont.woff2') format('woff2'),
-    url('/assets/fonts/pressstart2p-webfont.woff') format('woff'),
-    url('/assets/fonts/PressStart2P.ttf') format('truetype');
+  src: url("/assets/fonts/pressstart2p-webfont.woff2") format("woff2"),
+    url("/assets/fonts/pressstart2p-webfont.woff") format("woff"),
+    url("/assets/fonts/PressStart2P.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -27,6 +28,7 @@
   margin: 0;
   padding: 0;
 }
+
 .hidden {
   display: none;
 }
@@ -39,9 +41,11 @@ body {
   color: @color-ter;
   font-family: sans-serif;
 }
+
 body {
   display: flex;
   flex-direction: row;
+
   header {
     display: flex;
     flex-direction: column;
@@ -51,121 +55,137 @@ body {
     height: 100%;
     background-color: @color-second;
     color: @color-main;
+
     h1 {
       padding-bottom: 1rem;
       text-align: center;
       font-size: 1rem;
-      font-family: 'Press Start 2P', sans-serif;
+      font-family: "Press Start 2P", sans-serif;
     }
+
     a {
       color: inherit;
       font-size: inherit;
       text-decoration: none;
+
       &:hover {
         text-decoration: none;
       }
     }
+
     a.close-header {
       font-size: 2.4rem;
       align-self: flex-end;
       padding-right: 1rem;
     }
+
     a.profile {
       margin: 2rem;
       height: 160px;
       width: 160px;
+
       img {
         border-radius: 100%;
         height: 160px;
         width: 160px;
       }
     }
+
     nav {
       ul {
         margin: 1rem;
         text-transform: uppercase;
-        font-family: 'Press Start 2P', sans-serif;
+        font-family: "Press Start 2P", sans-serif;
+
         li {
-          margin: .1rem;
+          margin: 0.1rem;
           list-style: none;
           font-size: 1rem;
+
           ul {
-            margin: .5rem 0;
+            margin: 0.5rem 0;
             text-transform: none;
+
             li {
-              margin: .5rem .4rem .5rem 1rem;
-              font-size: .8rem;
+              margin: 0.5rem 0.4rem 0.5rem 1rem;
+              font-size: 0.8rem;
               text-align: right;
+
               a {
                 display: flex;
                 justify-content: flex-end;
+
                 &:after {
                   position: relative;
-                  left: .7rem;
+                  left: 0.7rem;
                   content: "<";
                 }
               }
-              
-              /*&:after {
-                position: relative;
-                left: 1rem;
-                content: "<";
-                float: right;
-              }*/
             }
           }
         }
       }
+
       .languages,
       .external-links {
         display: flex;
         flex-direction: row;
         justify-content: center;
         padding: 0;
+
         li {
-          padding: 0 .5rem;
+          padding: 0 0.5rem;
         }
+
         img {
           width: 32px;
           height: 32px;
         }
       }
     }
+
     p {
       padding: 1rem 0;
     }
   }
+
   a.open-header {
     position: absolute;
     color: inherit;
     right: 0;
     font-size: 1.6rem;
-    padding-top: .55rem;
-    padding-right: .3rem;
+    padding-top: 0.55rem;
+    padding-right: 0.3rem;
     text-decoration: none;
+
     &:hover {
       text-decoration: none;
     }
   }
+
   main {
     flex: 4.5;
     padding: 1rem 2rem;
-    overflow: auto; 
+    overflow: auto;
+
     h1 {
       margin-bottom: 1rem;
-      font-family: 'Press Start 2P', sans-serif;
+      font-family: "Press Start 2P", sans-serif;
       font-size: 1.5rem;
     }
+
     p {
-      padding: .5rem 0;
+      padding: 0.5rem 0;
       font-size: 1.2rem;
       white-space: pre-line;
     }
+
     canvas {
       margin: 2rem 0 0;
       width: 67vw;
       height: auto;
       border: @color-ter 1px solid;
+
       &:fullscreen {
         margin: 0;
         width: 100%;
@@ -173,6 +193,7 @@ body {
       }
     }
   }
+
   canvas {
     width: 100%;
     height: auto;
@@ -181,6 +202,7 @@ body {
 
 @media (min-width: 1024px) {
   body {
+
     header a.close-header,
     a.open-header {
       display: none;
@@ -197,7 +219,8 @@ body {
       top: 0;
       left: 0;
       overflow-x: hidden;
-      transition: .5s;
+      transition: 0.5s;
+
       a.profile {
         margin-top: -2rem;
       }

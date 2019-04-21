@@ -1,17 +1,20 @@
+/* global DrawUtil Vector */
+/* exported Bar */
+
 class Bar {
-  constructor(context, color, position, dimension) {
+  constructor (context, color, position, dimension) {
     this.context = context;
     this.color = color;
-    this.startPosition = position.copy()
+    this.startPosition = position.copy();
     this.position = position.copy();
     this.dimension = dimension;
   }
 
-  reset() {
+  reset () {
     this.position = this.startPosition.copy();
   }
 
-  move(speed, topLimit, bottomLimit) {
+  move (speed, topLimit, bottomLimit) {
     this.position.y += speed.y;
     if (this.position.y < topLimit) {
       this.position.y = topLimit;
@@ -20,7 +23,7 @@ class Bar {
     }
   }
 
-  moveTo(target, topLimit, bottomLimit) {
+  moveTo (target, topLimit, bottomLimit) {
     const deltaY = target.y - this.position.y - this.dimension.y / 2;
     const height = bottomLimit - topLimit;
     const speedY = (Math.sign(deltaY) * height) / 80;
@@ -31,12 +34,7 @@ class Bar {
     }
   }
 
-  draw() {
-    DrawUtil.filledRect(
-      this.context,
-      this.color,
-      this.position,
-      this.dimension
-    );
+  draw () {
+    DrawUtil.filledRect(this.context, this.color, this.position, this.dimension);
   }
 }

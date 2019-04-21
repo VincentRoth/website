@@ -1,4 +1,6 @@
-function toggleHeader() {
+/* exported toggleHeader */
+
+function toggleHeader () {
   const $header = document.getElementsByTagName('header')[0];
   if (!$header.style.width || $header.style.width === '0px') {
     $header.style.width = '100%';

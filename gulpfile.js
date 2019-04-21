@@ -12,17 +12,17 @@ const SRC_JS = `${DIST_FOLDER}/**/*.js`;
 
 const PORT = 9000;
 
-function clean() {
+function clean () {
   return gulp
     .src([DIST_FOLDER], { read: false, allowEmpty: true })
     .pipe($.clean());
 }
 
-function assets() {
+function assets () {
   return gulp.src(SRC_ASSETS).pipe(gulp.dest(DIST_ASSETS_FOLDER));
 }
 
-function html() {
+function html () {
   return gulp
     .src([SRC_HTML, '!src/**/*.partial.html'])
     .pipe(
@@ -49,7 +49,7 @@ function html() {
     .pipe(gulp.dest(DIST_FOLDER));
 }
 
-function less() {
+function less () {
   return gulp
     .src(SRC_CSS)
     .pipe($.plumber())
@@ -61,7 +61,7 @@ function less() {
     .pipe(gulp.dest(DIST_ASSETS_FOLDER));
 }
 
-function js() {
+function js () {
   return gulp
     .src(SRC_JS)
     .pipe($.plumber())
@@ -82,11 +82,11 @@ gulp.task('default', build);
 
 const reload = () => gulp.src(DIST_FOLDER).pipe($.connect.reload());
 
-function watch() {
+function watch () {
   gulp.watch(['src/**/*', 'resources/**/*'], gulp.series(build, reload));
 }
 
-function serveAndOpen() {
+function serveAndOpen () {
   $.connect.server({
     name: 'Dev App',
     root: ['dist', 'dist/fr'],
