@@ -8,7 +8,7 @@
   "main": "server.js",
   "scripts": {
     "build": "gulp build",
-    "eslint": "eslint ./src",
+    "lint": "eslint ./src",
     "start": "node server.js",
     "start:dev": "gulp serve",
     "postinstall": "npm run build"

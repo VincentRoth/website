@@ -1,6 +1,6 @@
 const path = require('path');
 const gulp = require('gulp');
-const $ = require('gulp-load-plugins')();
+const plugins = require('gulp-load-plugins')();
 
 const DIST_FOLDER = 'dist';
 const DIST_ASSETS_FOLDER = `${DIST_FOLDER}/assets`;
@@ -12,33 +12,33 @@ const SRC_JS = `${DIST_FOLDER}/**/*.js`;
 
 const PORT = 9000;
 
-function clean () {
+function clean() {
   return gulp
     .src([DIST_FOLDER], { read: false, allowEmpty: true })
-    .pipe($.clean());
+    .pipe(plugins.clean());
 }
 
-function assets () {
+function assets() {
   return gulp.src(SRC_ASSETS).pipe(gulp.dest(DIST_ASSETS_FOLDER));
 }
 
-function html () {
+function html() {
   return gulp
     .src([SRC_HTML, '!src/**/*.partial.html'])
     .pipe(
-      $.fileInclude({
+      plugins.fileInclude({
         prefix: '@@',
         basepath: '@file',
         indent: true
       })
     )
     .pipe(
-      $.useref({
+      plugins.useref({
         base: '../'
       })
     )
     .pipe(
-      $.i18nLocalize({
+      plugins.i18nLocalize({
         delimeters: ['${{', '}}'],
         locales: ['en', 'fr'],
         localeDir: 'resources/i18n',
@@ -49,24 +49,24 @@ function html () {
     .pipe(gulp.dest(DIST_FOLDER));
 }
 
-function less () {
+function less() {
   return gulp
     .src(SRC_CSS)
-    .pipe($.plumber())
+    .pipe(plugins.plumber())
     .pipe(
-      $.less({
+      plugins.less({
         paths: [path.join(__dirname, 'less', 'includes')]
       })
     )
     .pipe(gulp.dest(DIST_ASSETS_FOLDER));
 }
 
-function js () {
+function js() {
   return gulp
     .src(SRC_JS)
-    .pipe($.plumber())
+    .pipe(plugins.plumber())
     .pipe(
-      $.minify({
+      plugins.minify({
         ext: {
           min: '.js'
         },
@@ -80,20 +80,20 @@ const build = gulp.series(clean, assets, gulp.parallel(html, less), js);
 gulp.task('build', build);
 gulp.task('default', build);
 
-const reload = () => gulp.src(DIST_FOLDER).pipe($.connect.reload());
+const reload = () => gulp.src(DIST_FOLDER).pipe(plugins.connect.reload());
 
-function watch () {
+function watch() {
   gulp.watch(['src/**/*', 'resources/**/*'], gulp.series(build, reload));
 }
 
-function serveAndOpen () {
-  $.connect.server({
+function serveAndOpen() {
+  plugins.connect.server({
     name: 'Dev App',
     root: ['dist', 'dist/fr'],
     port: PORT,
     livereload: true
   });
-  gulp.src(__filename).pipe($.open({ uri: `http://localhost:${PORT}` }));
+  gulp.src(__filename).pipe(plugins.open({ uri: `http://localhost:${PORT}` }));
 }
 
 const serve = gulp.series(build, reload, gulp.parallel(watch, serveAndOpen));
