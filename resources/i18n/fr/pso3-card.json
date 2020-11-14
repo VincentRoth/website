@@ -3,5 +3,35 @@
     "description": "PSO3 C.A.R.D. est un jeu vidéo de carte sorti sur GameCube. Vous pouvez créer vos cartes pour ensuite les imprimer et jouer."
   },
   "title": "PSO 3 - C.A.R.D.",
-  "description": "Créer et imprimer vos cartes pour PSO3 C.A.R.D.."
+  "description": "Créer et imprimer vos cartes pour PSO3 C.A.R.D..",
+  "form": {
+    "rarity": "Rareté",
+    "number": "Numéro",
+    "name": "Nom",
+    "category": "Catégorie",
+    "type": "Type / Classe",
+    "cost": "Coût",
+    "image": "Image",
+    "hp": "HP",
+    "ap": "AP",
+    "tp": "TP",
+    "mv": "MV",
+    "top": "Défense",
+    "left": "Combinaison précédente",
+    "right": "Combinaison suivante",
+    "target": "Cible",
+    "range": "Portée",
+    "description": "Description"
+  },
+  "card": {
+    "categories": {
+      "hunter": "Hunter",
+      "arkz": "Arkz",
+      "object": "Objet",
+      "enemy": "Créature",
+      "action": "Action",
+      "assist": "Assist"
+    }
+  },
+  "credits": "PSO3 C.A.R.D. est la propriété de (C) SONICTEAM / SEGA.\nCe site web n'est affilié à aucune de ces marques."
 }

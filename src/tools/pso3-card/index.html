@@ -1,22 +1,86 @@
 <!DOCTYPE html>
 <html lang="${{common.language}}">
+  <head>
+    @@include('../../partial/meta.partial.html', {"relativePath":"../../"})
+    <!-- build:js /assets/js/tools/pso3-card.js defer -->
+    <script type="text/javascript" src="../../assets/js/draw-util.js"></script>
+    <script type="text/javascript" src="./drawer.js"></script>
+    <script type="text/javascript" src="./card.js"></script>
+    <!-- endbuild -->
+    <title>${{common.title}} - ${{pso3-card.title}}</title>
+    <meta name="Description" content="${{pso3-card.meta.description}}" />
+  </head>
 
-<head>
-  @@include('../../partial/meta.partial.html', {"relativePath":"../../"})
-  <!-- build:js /assets/js/tools/pso3-card.js defer -->
-  <script type="text/javascript" src="../../assets/js/draw-util.js"></script>
-  <!-- endbuild -->
-  <title>${{common.title}} - ${{pso3-card.title}}</title>
-  <meta name="Description" content="${{pso3-card.meta.description}}">
-</head>
-
-<body>
-  @@include('../../partial/header.partial.html', {"path": "/tools/pso3-card"})
-  <main>
-    <h1>${{pso3-card.title}}</h1>
-    <p>${{pso3-card.description}}</p>
-    <canvas id="card"></canvas>
-  </main>
-</body>
-
+  <body>
+    @@include('../../partial/header.partial.html', {"path": "/tools/pso3-card"})
+    <main>
+      <h1>${{pso3-card.title}}</h1>
+      <p>${{pso3-card.description}}</p>
+      <form>
+        <fieldset>
+          <label for="rarity">${{pso3-card.form.rarity}}</label>
+          <input id="rarity" />
+        </fieldset>
+        <fieldset>
+          <label for="number">${{pso3-card.form.number}}</label>
+          <input id="number" />
+        </fieldset>
+        <fieldset>
+          <label for="name">${{pso3-card.form.name}}</label>
+          <input id="name" />
+        </fieldset>
+        <fieldset>
+          <label for="category">${{pso3-card.form.category}}</label>
+          <select id="category">
+            <option value="hunter" selected>
+              ${{pso3-card.card.categories.hunter}}
+            </option>
+            <option value="arkz">${{pso3-card.card.categories.arkz}}</option>
+            <option value="object">
+              ${{pso3-card.card.categories.object}}
+            </option>
+            <option value="enemy">${{pso3-card.card.categories.enemy}}</option>
+            <option value="action">
+              ${{pso3-card.card.categories.action}}
+            </option>
+            <option value="assist">
+              ${{pso3-card.card.categories.assist}}
+            </option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <label for="type">${{pso3-card.form.type}}</label>
+          <input id="type" />
+        </fieldset>
+        <fieldset>
+          <label for="cost">${{pso3-card.form.cost}}</label>
+          <input id="cost" type="number" />
+        </fieldset>
+        <fieldset>
+          <label for="image">${{pso3-card.form.image}}</label>
+          <input id="image" type="file" accept="image/*" />
+        </fieldset>
+        <fieldset>
+          <label for="hp">${{pso3-card.form.hp}}</label>
+          <input id="hp" />
+        </fieldset>
+        <fieldset>
+          <label for="ap">${{pso3-card.form.ap}}</label>
+          <input id="ap" />
+        </fieldset>
+        <fieldset>
+          <label for="tp">${{pso3-card.form.tp}}</label>
+          <input id="tp" />
+        </fieldset>
+        <fieldset>
+          <label for="mv">${{pso3-card.form.mv}}</label>
+          <input id="mv" />
+        </fieldset>
+      </form>
+      <aside>
+        <canvas id="card"></canvas>
+      </aside>
+      <p>${{pso3-card.credits}}</p>
+    </main>
+  </body>
 </html>
